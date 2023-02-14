@@ -1,9 +1,10 @@
 const router = require('express').Router();
 const renderComponent = require('../utils/renderComponent');
-const Main = require('../views/Main');
+const Lk = require('../views/Lk');
 
 router.get('/', async (req, res) => {
-  renderComponent(Main, { }, res);
+  renderComponent(Lk, { }, res);
 });
 
+// router.post()
 module.exports = router;

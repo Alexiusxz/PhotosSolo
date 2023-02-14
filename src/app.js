@@ -7,7 +7,11 @@ const session = require('express-session');// сессии поключаем
 
 const FileStore = require('session-file-store')(session); // автоматическое создание папки для хранения куков
 
-const indexRouter = require('./routes/index.routes');
+const homeRouter = require('./routes/home.routes');
+const loginRouter = require('./routes/login.routes');
+const signupRouter = require('./routes/signUp.routes');
+const logoutRouter = require('./routes/logout.routes');
+const lkRouter = require('./routes/lk.routes');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -39,11 +43,11 @@ app.use((req, res, next) => {
   next();
 });
 
-
-
-app.use('/', indexRouter);
-// app.use('/home', )
-
+app.use('/', loginRouter);
+app.use('/signup', signupRouter);
+app.use('/home', homeRouter);
+app.use('/logout', logoutRouter);
+app.use('/lk', lkRouter);
 
 app.listen(PORT, () => {
   console.log(`Server is up on ${PORT} port`);
