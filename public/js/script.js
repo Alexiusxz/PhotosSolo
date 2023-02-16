@@ -39,6 +39,7 @@ search?.addEventListener('submit', async (e) => {
     const api = await getApi(e.target.search.value);
     const apiArr = api.photos;
     const apiContainer = document.querySelector('#apiContainer');
+    apiContainer.innerHTML = '';
     apiArr.forEach((photo) => {
       const div = document.createElement('div');
       div.classList = 'col-md-6 col-lg-4 filtr-item mb-5 ';
@@ -72,6 +73,9 @@ publish?.addEventListener('click', async (e) => {
     if (result) {
       e.target.attributes.class.ownerElement.innerText = 'Опубликовано!';
       e.target.attributes.class.ownerElement.disabled = true;
+    } else {
+      e.target.attributes.class.ownerElement.innerText = 'Уже опубликовано!';
+      e.target.attributes.class.ownerElement.disabled = true;
     }
   }
 });
@@ -97,16 +101,30 @@ myEntry?.addEventListener('click', async (e) => {
     // скрыть
     if (e.target.name === 'hide') {
       const entryId = e.target.id;
-      const divHide = document.querySelector(`#footer${entryId}`);
-      console.log(divHide);
-      const response = await fetch('/lk', {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ entryId }),
-      });
-      const result = response.json();
-      if (result) {
-        divHide.style.backgroundColor = 'red';
+      const divHide = document.querySelector(`#delete${entryId}`);
+      const divColor = divHide.style.backgroundColor;
+      console.log(divColor);
+
+      if (divColor === 'rgb(45, 44, 56)') {
+        const response = await fetch('/lk', {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ entryId, divColor }),
+        });
+        const result = response.json();
+        if (result) {
+          divHide.style.backgroundColor = 'red';
+        }
+      } else {
+        const response = await fetch('/lk', {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ entryId, divColor }),
+        });
+        const result = response.json();
+        if (result) {
+          divHide.style.backgroundColor = 'rgb(45, 44, 56)';
+        }
       }
     }
   }

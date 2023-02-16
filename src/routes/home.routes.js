@@ -6,7 +6,7 @@ const { User } = require('../../db/models');
 const { Like } = require('../../db/models');
 
 router.get('/', async (req, res) => {
-  const allEntries = await Entry.findAll({ include: 'L', order: [['createdAt', 'DESC']] });
+  const allEntries = await Entry.findAll({ include: 'L', order: [['rating', 'DESC']] });
   const users = await User.findAll({ include: Entry });
   // console.dir(users.map((el) => el.get({ plain: true })), { depth: null });
   // console.dir(allEntries.map((el) => el.get({ plain: true, nest: true })), { depth: null });

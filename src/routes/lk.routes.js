@@ -13,10 +13,12 @@ router.post('/', async (req, res) => {
   const { user } = req.session;
 
   try {
-    Entry.create({
-      userId: user.id, url: img, tag, rating: 0, visibility: 'block',
+    const [entry, created] = await Entry.findOrCreate({
+      where: {
+        userId: user.id, url: img, tag, rating: 0, visibility: 'block',
+      },
     });
-    res.json(true);
+    res.json(created);
   } catch (error) {
     res.json(false);
   }
@@ -32,12 +34,21 @@ router.delete('/', async (req, res) => {
   }
 });
 router.put('/', async (req, res) => {
-  const { entryId } = req.body;
-  try {
-    await Entry.update({ visibility: 'none' }, { where: { id: entryId } });
-    res.json(true);
-  } catch (error) {
-    res.json(false);
+  const { entryId, divColor } = req.body;
+  if (divColor === 'rgb(45, 44, 56)') {
+    try {
+      await Entry.update({ visibility: 'none' }, { where: { id: entryId } });
+      res.json(true);
+    } catch (error) {
+      res.json(false);
+    }
+  } else {
+    try {
+      await Entry.update({ visibility: 'block' }, { where: { id: entryId } });
+      res.json(true);
+    } catch (error) {
+      res.json(false);
+    }
   }
 });
 

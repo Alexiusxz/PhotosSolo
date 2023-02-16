@@ -20,7 +20,13 @@ const Lk = ({ myEntry, user }) => {
           <div className="collapse navbar-collapse justify-content-between" id="navcol-1">
             <ul className="navbar-nav mx-auto" style={{ paddingLeft: '0px', marginLeft: '251px', marginRight: '119px' }}>
               <li className="nav-item"><a className="nav-link" href="/home" style={{ marginLeft: '-1px', marginRight: '21px' }}>Главная</a></li>
-              <li className="nav-item"><a className="nav-link" href="/lk" style={{ marginRight: '29px' }}>ЛК</a></li>
+              <li className="nav-item">
+                <a className="nav-link" href="/lk" style={{ marginRight: '29px' }}>
+                  ЛК
+                  {'   '}
+                  {user.name}
+                </a>
+              </li>
               <li className="nav-item"><a className="nav-link" href="/logout">Выход</a></li>
             </ul>
           </div>
@@ -48,7 +54,7 @@ const Lk = ({ myEntry, user }) => {
         <div className="container">
           <div className="row filtr-container" id="myEntry">
             {myEntry.map((el) => (
-              <div className="col-md-6 col-lg-4 filtr-item mb-5" id={`delete${el.id}`}>
+              <div className="col-md-6 col-lg-4 filtr-item mb-5" id={`delete${el.id}`} style={!el.visibility === 'block' ? { backgroundColor: 'red' } : { backgroundColor: 'rgb(45, 44, 56)' }}>
                 <div className="card border-dark">
                   <div className="card-header bg-dark text-light">
                     <h5 className="m-0">{el.tag}</h5>
@@ -59,24 +65,15 @@ const Lk = ({ myEntry, user }) => {
                     {' '}
                     {user.name}
                   </div>
-                  {el.visibility === 'block'
-                    ? (
-                      <div className="d-flex card-footer" id={`footer${el.id}`}>
-                        <span style={{ marginRight: '0px', marginLeft: '13px', marginTop: '8px' }}>
-                          {`${el.rating} сердечек`}
-                        </span>
-                        <button id={el.id} name="hide" className="btn btn-outline-dark btn-sm ms-auto" type="button">скрыть</button>
-                        <button id={el.id} name="delete" className="btn btn-outline-dark btn-sm ms-auto" type="button">удалить</button>
-                      </div>
-                    ) : (
-                      <div className="d-flex card-footer" id={`footer${el.id}`} style={{ backgroundColor: 'red' }}>
-                        <span style={{ marginRight: '0px', marginLeft: '13px', marginTop: '8px' }}>
-                          {`${el.rating} сердечек`}
-                        </span>
-                        <button id={el.id} name="hide" className="btn btn-outline-dark btn-sm ms-auto" type="button">скрыть</button>
-                        <button id={el.id} name="delete" className="btn btn-outline-dark btn-sm ms-auto" type="button">удалить</button>
-                      </div>
-                    )}
+
+                  <div className="d-flex card-footer" id={`footer${el.id}`}>
+                    <span style={{ marginRight: '0px', marginLeft: '13px', marginTop: '8px' }}>
+                      {`${el.rating} сердечек`}
+                    </span>
+                    <button id={el.id} name="hide" className="btn btn-outline-dark btn-sm ms-auto" type="button">скрыть</button>
+                    <button id={el.id} name="delete" className="btn btn-outline-dark btn-sm ms-auto" type="button">удалить</button>
+                  </div>
+
                 </div>
               </div>
             ))}

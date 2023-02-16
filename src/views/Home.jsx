@@ -19,7 +19,14 @@ const Main = ({ allEntries, user, users }) => {
           <div className="collapse navbar-collapse justify-content-between" id="navcol-1">
             <ul className="navbar-nav mx-auto" style={{ paddinLeft: '0px', marginLeft: '251px', marginRight: '119px' }}>
               <li className="nav-item"><a className="nav-link active" href="/home" style={{ marginLeft: '-1px', marginRight: '21px' }}>Главная</a></li>
-              <li className="nav-item"><a className="nav-link" href="/lk" style={{ marginRight: '29px' }}>ЛК</a></li>
+              <li className="nav-item">
+                <a className="nav-link" href="/lk" style={{ marginRight: '29px' }}>
+                  ЛК
+                  {' '}
+                  {user.name}
+                </a>
+
+              </li>
               <li className="nav-item"><a className="nav-link" href="/logout">Выход</a></li>
             </ul>
           </div>
@@ -30,14 +37,13 @@ const Main = ({ allEntries, user, users }) => {
           <div className="row filtr-container" id="container">
             {allEntries.map((el) => (
 
-              <div className="col-md-6 col-lg-4 filtr-item mb-5" data-category="2,3" style={{ width: '30%', display: `${el.visibility}` }}>
+              <div className="col-md-6 col-lg-4 filtr-item mb-5" style={user.isAdmin && el.visibility === 'none' ? { width: '30%', display: 'block', backgroundColor: 'red' } : { width: '30%', display: `${el.visibility}` }}>
                 <div className="card border-dark">
                   <div className="card-header bg-dark text-light">
                     <h5 className="m-0">
                       ключевая фраза -
                       {' '}
                       <a href={`/home/tag/${el.tag}`}>
-
                         {el.tag}
                       </a>
                     </h5>
@@ -51,7 +57,6 @@ const Main = ({ allEntries, user, users }) => {
                     </a>
                   </div>
                   <div className="d-flex card-footer" id="like">
-
                     <button id={`like${el.id}`} className="btn btn-outline-dark btn-sm" type="button" name="like" style={el.L.find((e) => e.id === user.id) ? { backgroundColor: 'black', color: 'white' } : { }}>
 
                       нраица
@@ -75,7 +80,7 @@ const Main = ({ allEntries, user, users }) => {
                     </button>
                     <span id={`span${el.id}`} style={{ marginRight: '0px', marginLeft: '13px' }}>{`${el.rating}`}</span>
                     <img style={{ width: '35px', height: '25px' }} src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9gDc3Bx8oH92pcJMKzisWD3XRP7Gl45Wusw&usqp=CAU" alt="like" />
-
+                    {user.isAdmin ? (<button id={el.id} name="delete" className="btn btn-outline-dark btn-sm ms-auto" type="button">удалить</button>) : (<span />)}
                   </div>
                 </div>
               </div>
