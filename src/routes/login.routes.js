@@ -17,7 +17,7 @@ router.post('/', async (req, res) => {
     if (user) {
       const isValid = await bcrypt.compare(password, user.password); // валидность пароля
       if (isValid) {
-        req.session.user = { id: user.id, name: user.name }; // записываем данные в сессии
+        req.session.user = { id: user.id, name: user.name, isAdmin: user.isAdmin }; // записываем данные в сессии( нужно подумать на счет ролей)
         req.session.save(() => {
           res.redirect('/home');
         });
