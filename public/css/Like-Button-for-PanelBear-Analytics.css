@@ -9,3 +9,7 @@
 body {
   background-color: #2d2c38;
 }
+
+#publicLink:hover {
+  color: inherit;
+  text-decoration: none;};

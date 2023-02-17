@@ -37,7 +37,7 @@ const Main = ({ allEntries, user, users }) => {
           <div className="row filtr-container" id="container">
             {allEntries.map((el) => (
 
-              <div className="col-md-6 col-lg-4 filtr-item mb-5" style={user.isAdmin && el.visibility === 'none' ? { width: '30%', display: 'block', backgroundColor: 'red' } : { width: '30%', display: `${el.visibility}` }}>
+              <div className="col-md-6 col-lg-4 filtr-item mb-5" id={`delete${el.id}`} style={user.isAdmin && el.visibility === 'none' ? { width: '30%', display: 'block', backgroundColor: 'red' } : { width: '30%', display: `${el.visibility}` }}>
                 <div className="card border-dark">
                   <div className="card-header bg-dark text-light">
                     <h5 className="m-0">
@@ -52,7 +52,7 @@ const Main = ({ allEntries, user, users }) => {
                   <div className="card-body">
                     public by
                     {' '}
-                    <a href={`/home/user/${el.userId}`}>
+                    <a id="publicLink" href={`/home/user/${el.userId}`}>
                       {users.filter((u) => u.Entries.map((e) => e.id).includes(el.id))[0].name}
                     </a>
                   </div>
@@ -78,8 +78,8 @@ const Main = ({ allEntries, user, users }) => {
                       </svg>
 
                     </button>
-                    <span id={`span${el.id}`} style={{ marginRight: '0px', marginLeft: '13px' }}>{`${el.rating}`}</span>
-                    <img style={{ width: '35px', height: '25px' }} src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9gDc3Bx8oH92pcJMKzisWD3XRP7Gl45Wusw&usqp=CAU" alt="like" />
+                    <span id={`span${el.id}`} style={{ marginTop: '5px', marginLeft: '13px' }}>{`${el.rating}`}</span>
+                    {el.L.find((e) => e.id === user.id) ? (<img id={`heart${el.id}`} style={{ width: '35px', height: '35px' }} src="/img/heart-red.svg" alt="like" />) : (<img id={`heart${el.id}`} style={{ width: '40px', height: '30px' }} src="/img/heart-grey.svg" alt="like" />)}
                     {user.isAdmin ? (<button id={el.id} name="delete" className="btn btn-outline-dark btn-sm ms-auto" type="button">удалить</button>) : (<span />)}
                   </div>
                 </div>

@@ -1,7 +1,7 @@
 const signUp = window.document.forms.signUpForm;
 const search = window.document.forms.searchForm;
 const publish = document.querySelector('#apiContainer');
-const myEntry = document.querySelector('#myEntry');
+// const myEntry = document.querySelector('#myEntry');
 const container = document.querySelector('#container');
 // регистрация
 signUp?.addEventListener('submit', async (e) => {
@@ -53,6 +53,7 @@ search?.addEventListener('submit', async (e) => {
       </div>
     `;
       apiContainer.appendChild(div);
+      e.target.search.value = '';
     });
   } catch (error) {
     console.error(error);
@@ -80,7 +81,7 @@ publish?.addEventListener('click', async (e) => {
   }
 });
 // удалить, скрыть
-myEntry?.addEventListener('click', async (e) => {
+container?.addEventListener('click', async (e) => {
   if (e.target.tagName === 'BUTTON') {
     if (e.target.name === 'delete') {
       const entryId = e.target.id;
@@ -145,11 +146,19 @@ container?.addEventListener('click', async (e) => {
       span.innerText = result.counter.rating;
       e.target.style.backgroundColor = 'black';
       e.target.style.color = 'white';
+      const heart = document.querySelector(`#heart${id}`);
+      heart.src = '/img/heart-red.svg';
+      heart.style.width = '35px';
+      heart.style.height = '35px';
     } else {
       const span = document.querySelector(`#span${id}`);
       span.innerText = result.counter.rating;
       e.target.style.backgroundColor = 'white';
       e.target.style.color = 'black';
+      const heart = document.querySelector(`#heart${id}`);
+      heart.src = '/img/heart-grey.svg';
+      heart.style.width = '35px';
+      heart.style.height = '35px';
     }
   }
 });

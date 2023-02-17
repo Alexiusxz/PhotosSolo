@@ -4,7 +4,7 @@ const Lk = require('../views/Lk');
 const { Entry } = require('../../db/models');
 
 router.get('/', async (req, res) => {
-  const myEntry = await Entry.findAll({ where: { userId: req.session.user.id }, order: [['createdAt', 'DESC']] });
+  const myEntry = await Entry.findAll({ where: { userId: req.session.user.id }, order: [['rating', 'DESC']] });
   renderComponent(Lk, { myEntry }, res);
 });
 

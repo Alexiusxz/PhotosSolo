@@ -38,6 +38,10 @@ const Login = () => {
                     <div className="mb-3"><input className="form-control" type="text" name="name" placeholder="Name" /></div>
                     <div className="mb-3"><input className="form-control" type="password" name="password" placeholder="Password" /></div>
                     <div className="mb-3"><button className="btn btn-primary shadow d-block w-100" type="submit">Войти</button></div>
+                    <p className="text-muted">
+                      Нет аккаунта?&nbsp;&nbsp;
+                      <a href="/signup">Регистрация</a>
+                    </p>
                   </form>
                 </div>
               </div>

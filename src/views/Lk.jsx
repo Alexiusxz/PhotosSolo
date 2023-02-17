@@ -52,7 +52,7 @@ const Lk = ({ myEntry, user }) => {
       <h2 style={{ marginLeft: '158px', color: 'white', marginTop: '20px' }}>Фото опубликованные вами:</h2>
       <section className="py-5">
         <div className="container">
-          <div className="row filtr-container" id="myEntry">
+          <div className="row filtr-container" id="container">
             {myEntry.map((el) => (
               <div className="col-md-6 col-lg-4 filtr-item mb-5" id={`delete${el.id}`} style={!el.visibility === 'block' ? { backgroundColor: 'red' } : { backgroundColor: 'rgb(45, 44, 56)' }}>
                 <div className="card border-dark">
